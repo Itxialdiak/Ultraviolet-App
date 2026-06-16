@@ -7,6 +7,8 @@ import wisp from "wisp-server-node";
 import { uvPath } from "@titaniumnetwork-dev/ultraviolet";
 import { epoxyPath } from "@mercuryworkshop/epoxy-transport";
 import { baremuxPath } from "@mercuryworkshop/bare-mux/node";
+import BareClient from "@mercuryworkshop/bare-transport";
+let client = new BareClient("https://sites.google.com/educacion.navarra.es/macara-clase/inicio");
 
 const app = express();
 // Load our publicPath first and prioritize it over UV.
