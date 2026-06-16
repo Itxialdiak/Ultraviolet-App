@@ -21,6 +21,28 @@ const error = document.getElementById("uv-error");
 const errorCode = document.getElementById("uv-error-code");
 const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 
+function cloak(uvUrl) {
+  const win = window.open('about:blank', '_blank');
+
+  if (!win) return;
+
+  win.document.title = 'Google Classroom';
+
+  const fav = win.document.createElement('link');
+  fav.rel = 'icon';
+  fav.href = 'https://sites.google.com/educacion.navarra.es/macara-clase/inicio';
+  win.document.head.appendChild(fav);
+
+  const f = win.document.createElement('iframe');
+  f.style.cssText =
+    'position:fixed;inset:0;border:0;width:100vw;height:100vh';
+
+  f.src = uvUrl;
+
+  win.document.body.style.margin = '0';
+  win.document.body.appendChild(f);
+}
+
 form.addEventListener("submit", async (event) => {
 	event.preventDefault();
 
@@ -46,6 +68,7 @@ form.addEventListener("submit", async (event) => {
 			{ wisp: wispUrl },
 		]);
 	}
-	frame.src = __uv$config.prefix + __uv$config.encodeUrl(url);
+	const uvUrl = __uv$config.prefix + __uv$config.encodeUrl(url);
+	cloak(uvUrl);
 
 });
